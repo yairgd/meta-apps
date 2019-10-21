@@ -1,0 +1,30 @@
+From 129e04fd041058d30e01a0149ab9de2b1eef9515 Mon Sep 17 00:00:00 2001
+From: Yair Gadelov <yairg@belken-lazer.com>
+Date: Sat, 5 Oct 2019 17:25:32 +0300
+Subject: [PATCH] remove /proc/self/status is available for checking TracerPid
+ from configure.init
+
+---
+ configure.init | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/configure.init b/configure.init
+index 920b2a3..bf240aa 100644
+--- a/configure.init
++++ b/configure.init
+@@ -69,9 +69,9 @@ dnl determine if /dev/ptmx is available for pseudo terminals
+ AC_CHECK_FILE([/dev/ptmx],
+ 	      [AC_DEFINE(HAVE_DEV_PTMX, 1, have /dev/ptmx)])
+ 
+-dnl determine if /proc/self/status is available for checking TracerPid
+-AC_CHECK_FILE([/proc/self/status],
+-	      [AC_DEFINE(HAVE_PROC_SELF_STATUS_FILE, 1, have /proc/self/status file)])
++#dnl determine if /proc/self/status is available for checking TracerPid
++#AC_CHECK_FILE([/proc/self/status],
++#	      [AC_DEFINE(HAVE_PROC_SELF_STATUS_FILE, 1, have /proc/self/status file)])
+ 
+ dnl Check for pty.h
+ AC_CHECK_HEADERS([pty.h],
+-- 
+2.21.0
+
