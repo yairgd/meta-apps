@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/git//LICENSE;md5=a4de58bb0cfbf1057d8e0cb28
 #BB_STRICT_CHECKSUM = "0"
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-DEPENDS = " curl libwebsockets jsoncpp libpqxx libcap openssl    "
-RDEPENDS_${PN}="data-server"
+DEPENDS = " curl libwebsockets jsoncpp libpqxx libcap openssl fxcm   "
+RDEPENDS_${PN}="fxcm"
 
 ## IMAGE_INSTALL += "libunwind icu libcurl libssl10 curl"
 
