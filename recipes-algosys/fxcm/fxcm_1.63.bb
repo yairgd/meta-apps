@@ -15,6 +15,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 SRC_URI = "file://ForexConnectAPI-1.6.3-Linux-x86_64.tar.gz\
 "
 
+PACKAGES = "${PN}"
 
 
 
@@ -46,10 +47,12 @@ FILES_${PN} = "\
 
 
 do_install() {
-	mkdir  ${D}/usr/include/c++ -p
+	mkdir  ${D}/usr/include -p
 	mkdir  ${D}/usr/lib -p
 	cp ${S}/ForexConnectAPI-1.6.3-Linux-x86_64/lib/* ${D}/usr/lib -arf
 	cp ${S}/ForexConnectAPI-1.6.3-Linux-x86_64/include/* ${D}/usr/include -arf
+	rm  ${D}/usr/lib/java -fr
+	rm  ${D}/usr/lib/net -fr
 
 }
 

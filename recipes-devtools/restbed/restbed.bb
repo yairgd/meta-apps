@@ -1,22 +1,56 @@
-SUMMARY = "JSON C++ lib used to read and write json file."
-DESCRIPTION = "Jsoncpp is an implementation of a JSON (http://json.org) reader \
-               and writer in C++. JSON (JavaScript Object Notation) is a \
-               lightweight data-interchange format. It is easy for humans to \
-               read and write. It is easy for machines to parse and generate."
+#
+# This file was derived from the 'Hello World!' example recipe in the
+# Yocto Project Development Manual.
+#
+#-Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed
 
-HOMEPAGE = "https://github.com/open-source-parsers/jsoncpp"
 
-#SECTION = "libs"
-DEPENDS = " asio catch2 "
-
+DESCRIPTION = "installs FXCM  3'rd party libraries"
+SECTION = "examples"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=36f8a3bd5084413aa017059ccd1a2d78"
+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
-SRCREV = "f74f9329dac82e662c1d570b7cd72c192b729eb4"
-SRC_URI = "gitsm://github.com/corvusoft/restbed;branch=master;"
+#SRCREV = "${AUTOREV}"
+FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+SRC_URI = "file://restbed.tar.gz \
+"
+PACKAGES = "${PN}-dbg ${PN} ${PN}-doc ${PN}-dev ${PN}-staticdev ${PN}-locale"
 
-S = "${WORKDIR}/git"
 
-inherit cmake
 
-EXTRA_OECMAKE += "-DBUILD_SSL=NO"
+
+#SRC_URI = "git://git.multitech.net/helloworld-autotools.git;protocol=git"
+#inherit autotools
+
+S = "${WORKDIR}/"
+
+#do_compile() {
+#	echo ${LDFLAGS}
+#	${CC} helloworld.c ${LDFLAGS} -o helloworld
+#}
+
+
+INSANE_SKIP_${PN}-dev=" dev-elf packages-list dev-deps license-checksum file-rdeps dev-so host-user-contaminated staticdev "
+INSANE_SKIP_${PN} = "already-stripped  dev-deps  license-checksum file-rdeps  dev-so host-user-contaminated staticdev "
+
+
+
+FILES_${PN} = "\
+    ${bindir}/* \
+    ${includedir}/* \
+    ${sysconfdir} \
+    ${libdir} \
+    /usr/*\
+    "
+
+
+
+
+do_install() {
+	mkdir  ${D}/usr/include/ -p
+	mkdir  ${D}/usr/lib -p
+	cp ${S}/lib/*     ${D}/usr/lib -arf
+	cp ${S}/include/* ${D}/usr/include -arf
+
+}
+

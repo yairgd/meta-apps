@@ -2,13 +2,16 @@ SUMMARY = "curses-based interface to GDB"
 DESCRIPTION = "cgdb is a lightweight curses (terminal-based) interface to the GNU Debugger (GDB)."
 HOMEPAGE = "http://cgdb.github.io/"
 SECTION = "devel"
-LICENSE = "Belkin-Lisence"
-LIC_FILES_CHKSUM = "file://${WORKDIR}/git//LICENSE;md5=a4de58bb0cfbf1057d8e0cb28cb34e16"
+
+LICENSE = "MIT"
+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
+
+
 #BB_STRICT_CHECKSUM = "0"
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-DEPENDS = " curl libwebsockets jsoncpp libpqxx libcap openssl fxcm   "
-RDEPENDS_${PN}="fxcm"
+DEPENDS = " curl libwebsockets jsoncpp  libcap openssl  restbed libpqxx fxcm  "
+RDEPENDS_${PN}="   libpqxx  fxcm "
 
 ## IMAGE_INSTALL += "libunwind icu libcurl libssl10 curl"
 
@@ -47,7 +50,18 @@ do_install() {
 	cp ${S}/algotrade/algosys/build/dataServer/dataServer         ${D}${bindir}
 	cp ${S}/algotrade/algosys/build/StrategyRunner/strategyServer ${D}${bindir}
 	cp ${S}/algotrade/etc/dataserver.conf 			      ${D}${sysconfdir}
-	cp ${S}/algotrade/thirdParty/lib/libForexConnect.so	      ${D}${libdir}
 
 
 }
+
+# https://stackoverflow.com/questions/54660983/how-to-add-recipe-for-yocto-systemd-service
+# Enable SUID bit for applications that need it
+##pkg_postinst_${PN}-rltraceroute6 () {
+##    chmod 4555 ${bindir}/rltraceroute6
+##}
+##pkg_postinst_${PN}-ndisc6 () {
+##    chmod 4555 ${bindir}/ndisc6
+##}
+##pkg_postinst_${PN}-rdisc6 () {
+##    chmod 4555 ${bindir}/rdisc6
+##}
